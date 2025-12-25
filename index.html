@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <button id="startCam" style="<br/>position:fixed;<br/>bottom:20px;<br/>left:50%;<br/>transform:translateX(-50%);<br/>z-index:9999;<br/>padding:12px 20px;<br/>font-size:14px;"><br/>启动手势<br/></button>
     <title>Grand Luxury Tree Final v2</title>
     <style>
         body { margin: 0; overflow: hidden; background-color: #000000; font-family: 'Times New Roman', serif; }
@@ -195,7 +197,7 @@
             createDefaultPhotos();
             setupPostProcessing();
             setupEvents();
-            await initMediaPipe();
+            document.getElementById("startCam").onclick = async () => {<br/>    await initMediaPipe();<br/>    document.getElementById("startCam").style.display = "none";<br/>};
             
             const loader = document.getElementById('loader');
             loader.style.opacity = 0;
@@ -531,7 +533,7 @@
             handLandmarker = await HandLandmarker.createFromOptions(vision, {
                 baseOptions: {
                     modelAssetPath: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`,
-                    delegate: "GPU"
+                    delegate: "CPU"
                 },
                 runningMode: "VIDEO",
                 numHands: 1
